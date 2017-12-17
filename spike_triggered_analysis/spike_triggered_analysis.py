@@ -83,7 +83,7 @@ sess.run(tf.global_variables_initializer())
 
 plt.plot(sta.eval())
 plt.xlabel('Time (ms)')
-plt.ylabel('Stimulus')
+plt.ylabel('Spike-Triggered Average')
 plt.title('Spike-Triggered Average of the H1 Neuron')
 
 plt.savefig("./graphs/sta.png")
