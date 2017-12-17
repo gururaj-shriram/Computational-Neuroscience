@@ -198,6 +198,8 @@ prob = tf.nn.softmax(fc8)
 
 init = tf.global_variables_initializer()
 sess = tf.Session()
+
+writer = tf.summary.FileWriter('./graphs', sess.graph)
 sess.run(init)
 
 t = time.time()
@@ -214,3 +216,5 @@ for input_im_ind in range(output.shape[0]):
 
 print("\nTime elapsed")
 print(time.time()-t)
+
+writer.close()

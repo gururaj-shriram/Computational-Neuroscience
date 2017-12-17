@@ -86,6 +86,6 @@ plt.xlabel('Time (ms)')
 plt.ylabel('Stimulus')
 plt.title('Spike-Triggered Average of the H1 Neuron')
 
-plt.show()
+plt.savefig("./graphs/sta.png")
 
 writer.close()
