@@ -42,14 +42,14 @@ ydim = train_y.shape[1]
 #Read Image, and change to BGR
 
 
-im1 = (imread("laska.png")[:,:,:3]).astype(float32)
-im1 = im1 - mean(im1)
+im1 = (imread("great_white_shark.png")[:,:,:3]).astype(float32)
+#im1 = im1 - mean(im1)
 im1[:, :, 0], im1[:, :, 2] = im1[:, :, 2], im1[:, :, 0]
 
-im2 = (imread("poodle.png")[:,:,:3]).astype(float32)
+im2 = (imread("website.png")[:,:,:3]).astype(float32)
 im2[:, :, 0], im2[:, :, 2] = im2[:, :, 2], im2[:, :, 0]
 
-im3 = (imread("dog.png")[:,:,:3]).astype(float32)
+im3 = (imread("firetruck.png")[:,:,:3]).astype(float32)
 im3[:, :, 0], im3[:, :, 2] = im3[:, :, 2], im3[:, :, 0]
 
 
