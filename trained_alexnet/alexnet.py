@@ -28,8 +28,22 @@ from numpy import random
 import tensorflow as tf
 from caffe_classes import class_names
 
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
+FILENAMES = [
+  'great_white_shark.png',
+  'website.png',
+  'firetruck.png',
+  'violin.png',
+  'american_lobster.png',
+  'restaurant.png',
+  'tennis_ball.png'
+  'water_bottle.png'
+  'burrito.png'
+  'coffee.png',
+  'movie_theater.png',
+  'jack_o_lantern.png'
+]
 
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
 
 train_x = zeros((1, 227,227,3)).astype(float32)
 train_y = zeros((1, 1000))
@@ -41,16 +55,14 @@ ydim = train_y.shape[1]
 ################################################################################
 #Read Image, and change to BGR
 
+images = []
 
-im1 = (imread("great_white_shark.png")[:,:,:3]).astype(float32)
-#im1 = im1 - mean(im1)
-im1[:, :, 0], im1[:, :, 2] = im1[:, :, 2], im1[:, :, 0]
-
-im2 = (imread("website.png")[:,:,:3]).astype(float32)
-im2[:, :, 0], im2[:, :, 2] = im2[:, :, 2], im2[:, :, 0]
-
-im3 = (imread("firetruck.png")[:,:,:3]).astype(float32)
-im3[:, :, 0], im3[:, :, 2] = im3[:, :, 2], im3[:, :, 0]
+for filename in FILENAMES:
+  img = (imread('images/' + filename)[:,:,:3]).astype(float32)
+  #normalizing with the below line helps sometimes
+  #img = img - mean(img)
+  img[:, :, 0], img[:, :, 2] = img[:, :, 2], img[:, :, 0]
+  images.append(img)
 
 
 ################################################################################
@@ -199,11 +211,11 @@ prob = tf.nn.softmax(fc8)
 init = tf.global_variables_initializer()
 sess = tf.Session()
 
-writer = tf.summary.FileWriter('./graphs', sess.graph)
+#writer = tf.summary.FileWriter('./graphs', sess.graph)
 sess.run(init)
 
 t = time.time()
-output = sess.run(prob, feed_dict = {x:[im1,im2,im3]})
+output = sess.run(prob, feed_dict = {x:images})
 ################################################################################
 
 #Output:
@@ -217,4 +229,4 @@ for input_im_ind in range(output.shape[0]):
 print("\nTime elapsed")
 print(time.time()-t)
 
-writer.close()
+# writer.close()
